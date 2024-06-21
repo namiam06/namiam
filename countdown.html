@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngược</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: white;
+            margin: 0;
+        }
+        #countdown {
+            text-align: center;
+        }
+        #countdown div {
+            font-size: 2em;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">
+        <div id="days"></div>
+        <div id="hours"></div>
+        <div id="minutes"></div>
+        <div id="seconds"></div>
+    </div>
+
+    <script>
+        // Đặt thời gian đếm ngược (ví dụ: đến ngày 27 tháng 06 năm 2024)
+        var countDownDate = new Date("Jun 27, 2024 07:30:00").getTime();
+
+        // Cập nhật đếm ngược mỗi giây
+        var x = setInterval(function() {
+            // Lấy thời gian hiện tại
+            var now = new Date().getTime();
+
+            // Tìm khoảng cách giữa bây giờ và thời gian đếm ngược
+            var distance = countDownDate - now;
+
+            // Tính toán thời gian cho ngày, giờ, phút và giây
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Hiển thị kết quả trong các thẻ HTML
+            document.getElementById("days").innerHTML = days + " Ngày ";
+            document.getElementById("hours").innerHTML = hours + " Giờ ";
+            document.getElementById("minutes").innerHTML = minutes + " Phút ";
+            document.getElementById("seconds").innerHTML = seconds + " Giây ";
+
+            // Nếu đếm ngược hoàn thành, hiển thị thông báo
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "Đếm ngược kết thúc!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
